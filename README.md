@@ -17,3 +17,5 @@ For the next date i will for sure aplly my space like editor also improve some t
 
 git ignore was created via chatgpt beacuse i didn't know which files should i put there and which not.
 chat also helped me in some parts in css and some in overall things where i was stuck.
+
+Also Forgot to put the deafult page setting as login. after going to the ip use /login to go to the login page.

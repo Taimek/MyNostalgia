@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome to the Home Page</h2>
+        <a class="edit-btn" href="{% url 'profile' %}">Go to Profile</a>
+        <a class="logout-btn" href="{% url 'logout' %}">Logout</a>
+    </div>
+</body>
+</html>

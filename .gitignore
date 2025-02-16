@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Django
+db.sqlite3
+/media
+/static
+
+# Virtualenv
+venv/
+env/
+*.env
+
+# Log files
+*.log
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# Django migrations
+*.log
+*.pot
+*.pyc
+*.pyo
+*.sqlite3

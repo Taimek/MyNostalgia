@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import RegisterForm, UserUpdateForm, ProfilePictureForm
+from .forms import RegisterForm, UserUpdateForm, ProfilePictureForm, CustomHTMLForm
 from .models import UserProfile
+from django.template.loader import render_to_string
+
 
 
 
@@ -51,14 +53,33 @@ def edit_profile(request):
     if request.method == 'POST':
         user_form = UserUpdateForm(request.POST, instance=request.user)
         profile_form = ProfilePictureForm(request.POST, request.FILES, instance=user_profile)
+        custom_html_form = CustomHTMLForm(request.POST, instance=user_profile)
 
-        if user_form.is_valid() and profile_form.is_valid():
+        if user_form.is_valid() and profile_form.is_valid() and custom_html_form.is_valid():
             user_form.save()
             profile_form.save()
+            custom_html_form.save()
             return redirect('profile')
     else:
+        # Przy GET, jeśli custom_html pusty, ładujemy do niego zawartość i ZAPISUJEMY
+        if not user_profile.custom_html:
+            rendered_html = render_to_string('profile_content.html', {
+                'user': request.user,
+                'user_profile': user_profile,
+            })
+            user_profile.custom_html = rendered_html
+            user_profile.save()  
+
         user_form = UserUpdateForm(instance=request.user)
         profile_form = ProfilePictureForm(instance=user_profile)
+        custom_html_form = CustomHTMLForm(instance=user_profile)
 
-    return render(request, 'edit_profile.html', {'user_form': user_form, 'profile_form': profile_form})
+    return render(request, 'edit_profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form,
+        'custom_html_form': custom_html_form,
+    })
 
+@login_required
+def home(request):
+    return render(request, 'home.html')

@@ -21,4 +21,10 @@ class ProfilePictureForm(forms.ModelForm):
         model = UserProfile
         fields = ['profile_picture']
 
-
+class CustomHTMLForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['custom_html']  # <-- to pole, które właśnie dodaliśmy w models.py
+        widgets = {
+            'custom_html': forms.Textarea(attrs={'rows': 20, 'cols': 100, 'placeholder': 'Wklej swój kod HTML + CSS tutaj...'}),
+        }

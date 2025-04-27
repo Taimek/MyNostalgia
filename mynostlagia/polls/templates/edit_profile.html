@@ -11,8 +11,14 @@
     <h2>Edit Profile</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <h2>Dane użytkownika</h2>
         {{ user_form.as_p }}
+    
+        <h2>Zdjęcie profilowe</h2>
         {{ profile_form.as_p }}
+    
+        <h2>Własny HTML/CSS (pełna moc!)</h2>
+        {{ custom_html_form.as_p }}
         <button type="submit">Save Changes</button>
     </form>
     <a href="{% url 'profile' %}">Back to Profile</a>

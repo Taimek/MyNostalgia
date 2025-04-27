@@ -1,0 +1,20 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+    
+    
+</head>
+<body>
+    
+    {% if user_profile.custom_html %}
+        {{ user_profile.custom_html|safe }}
+    {% else %}
+    {% include 'profile_content.html' %}
+        <p>Jeszcze nie dodałeś własnego stylu 😢</p>
+    {% endif %}
+
+</body>
+</html>
